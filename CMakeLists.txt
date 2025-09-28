@@ -10,13 +10,18 @@ qt_add_executable(MongoDB_Study
     mainwindow.h mainwindow.cpp
     mainwindow.ui
     main.cpp
+    Book.h
+    Book.cpp
 )
 
-target_compile_features(MongoDB_Study PRIVATE cxx_std_23)
-
+target_compile_features(MongoDB_Study PRIVATE cxx_std_17)
+include_directories(/usr/include/mongocxx/v_noabi /usr/include/bsoncxx/v_noabi)
+link_directories(/usr/lib)
 target_link_libraries(MongoDB_Study
     PRIVATE
         Qt6::Widgets
+        mongocxx
+        bsoncxx
 )
 
 set_target_properties(MongoDB_Study PROPERTIES
