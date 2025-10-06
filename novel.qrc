@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/novel"/>
+    <qresource prefix="/">
+        <file>image/logo.png</file>
+        <file>image/logo2.png</file>
+    </qresource>
+</RCC>

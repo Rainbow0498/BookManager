@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "Login.h"
 #include <mongocxx/client.hpp>
 #include <mongocxx/instance.hpp>
 #include <bsoncxx/builder/basic/document.hpp>
@@ -53,31 +54,31 @@ void initDatabase(mongocxx::client& client) {
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    mongocxx::instance inst{};
-    mongocxx::client conn{mongocxx::uri{}};
-    initDatabase(conn);
-    auto db = conn["noveldb"];
-    auto coll = db["novels"];
+    Login w;
+    // mongocxx::instance inst{};
+    // mongocxx::client conn{mongocxx::uri{}};
+    // initDatabase(conn);
+    // auto db = conn["noveldb"];
+    // auto coll = db["novels"];
 
-    std::vector<Chapter> chaps = {
-        Chapter("第一章 陨落的天才", 1200, "正文内容..."),
-        Chapter("第二章 修炼的起点", 1300, "正文内容...")
-    };
+    // std::vector<Chapter> chaps = {
+    //     Chapter("第一章 陨落的天才", 1200, "正文内容..."),
+    //     Chapter("第二章 修炼的起点", 1300, "正文内容...")
+    // };
 
-    // 构造书籍
-    Book book(
-        "斗破苍穹",
-        "http://xxx.com/doupo.jpg",
-        "天蚕土豆",
-        "连载",
-        {"玄幻", "热血"},
-        2500000,
-        "少年萧炎，天才陨落，浴火重生……",
-        chaps
-        );
+    // // 构造书籍
+    // Book book(
+    //     "斗破苍穹",
+    //     "http://xxx.com/doupo.jpg",
+    //     "天蚕土豆",
+    //     "连载",
+    //     {"玄幻", "热血"},
+    //     2500000,
+    //     "少年萧炎，天才陨落，浴火重生……",
+    //     chaps
+    //     );
 
-    coll.insert_one(book.toBson().view());
+    // coll.insert_one(book.toBson().view());
 
 
     w.show();

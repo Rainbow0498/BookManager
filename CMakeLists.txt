@@ -12,6 +12,14 @@ qt_add_executable(MongoDB_Study
     main.cpp
     Book.h
     Book.cpp
+    User.h
+    DatabaseManager.h
+    Login.h Login.cpp Login.ui
+    Register.h
+    Register.cpp
+    novel.qrc
+    Register.ui
+
 )
 
 target_compile_features(MongoDB_Study PRIVATE cxx_std_17)
