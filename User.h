@@ -15,7 +15,6 @@ using bsoncxx::builder::basic::make_array;
 struct UserBook {
     bsoncxx::oid book_id;  // 对应 novels 集合的 _id
     int progress;                   // 当前看到的章节索引
-    std::string lastReadTime;       // 可选：上次阅读时间
 
     bsoncxx::document::value toBson() const {
         return make_document(
@@ -42,7 +41,7 @@ public:
         return make_document(
             kvp("username", username),
             kvp("password", password),
-            kvp("bookshelf", shelfArr)
+            kvp("bookshelf", shelfArr.extract())
             );
     }
 };

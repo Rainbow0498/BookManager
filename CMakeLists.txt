@@ -19,7 +19,11 @@ qt_add_executable(MongoDB_Study
     Register.cpp
     novel.qrc
     Register.ui
-
+    novel.h novel.cpp novel.ui
+    BookItemWidget.h
+    UserSession.h
+    ImportBookData.h
+    json.hpp
 )
 
 target_compile_features(MongoDB_Study PRIVATE cxx_std_17)

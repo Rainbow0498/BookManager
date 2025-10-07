@@ -9,6 +9,7 @@ Register::Register(QWidget *parent)
     , ui(new Ui::Register)
 {
     ui->setupUi(this);
+    this->resize(1060, 850);
     ui->etUserPassword->setEchoMode(QLineEdit::Password);
     ui->etUserPassword_2->setEchoMode(QLineEdit::Password);
 }

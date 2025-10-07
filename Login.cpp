@@ -1,5 +1,7 @@
 #include "Login.h"
 #include "DatabaseManager.h"
+#include "UserSession.h"
+#include "novel.h"
 #include "Register.h"
 #include <QMessageBox>
 #include "ui_Login.h"
@@ -9,6 +11,7 @@ Login::Login(QWidget *parent)
     , ui(new Ui::Login)
 {
     ui->setupUi(this);
+    this->resize(1060, 850);
     ui->etUserPassword->setEchoMode(QLineEdit::Password);
 }
 
@@ -36,7 +39,10 @@ void Login::on_btnLogin_clicked() {
     if (dbPwd == password) {
         ui->statusLabel->setText("✅ 登录成功");
         QMessageBox::information(this, "登录成功", "欢迎回来，" + ui->etUserName->text());
-        // TODO: 进入主界面
+        UserSession::instance().login(QString::fromStdString(username));
+        auto *rec = new Novel();
+        rec->show();
+        this->close();
     } else {
         ui->statusLabel->setText("❌ 密码错误");
     }

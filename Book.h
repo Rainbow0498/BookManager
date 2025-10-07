@@ -15,25 +15,19 @@ using bsoncxx::builder::basic::make_array;
 class Chapter {
 public:
     std::string title;   // 章节名称
-    int wordCount;       // 字数
-    std::string content; // 正文内容
 
-    Chapter(const std::string& t, int w, const std::string& c)
-        : title(t), wordCount(w), content(c) {}
+    Chapter(const std::string& t)
+        : title(t) {}
 
     bsoncxx::document::value toBson() const {
         return make_document(
-            kvp("title", title),
-            kvp("word_count", wordCount),
-            kvp("content", content)
+            kvp("title", title)
             );
     }
 
     static Chapter fromBson(const bsoncxx::document::view& doc) {
         return Chapter(
-            std::string(doc["title"].get_string().value),
-            doc["word_count"].get_int32(),
-            std::string(doc["content"].get_string().value)
+            std::string(doc["title"].get_string().value)
             );
     }
 };
@@ -46,13 +40,13 @@ public:
     std::string author;       // 作者
     std::string status;       // 状态: 连载 / 断更 / 完结
     std::vector<std::string> categories; // 分类: 玄幻 / 游戏 / 都市...
-    int wordCount;            // 总字数
+    std::string wordCount;            // 总字数
     std::string intro;        // 简介
     std::vector<Chapter> chapters; // 章节集合
 
     Book(const std::string& t, const std::string& c, const std::string& a,
          const std::string& s, const std::vector<std::string>& cats,
-         int wc, const std::string& i, const std::vector<Chapter>& ch)
+         const std::string& wc, const std::string& i, const std::vector<Chapter>& ch)
         : title(t), coverUrl(c), author(a), status(s),
         categories(cats), wordCount(wc), intro(i), chapters(ch) {}
 
@@ -88,7 +82,7 @@ public:
         std::string cover = std::string(doc["cover_url"].get_string().value);
         std::string author = std::string(doc["author"].get_string().value);
         std::string status = std::string(doc["status"].get_string().value);
-        int wordCount = doc["word_count"].get_int32();
+        std::string  wordCount = std::string(doc["word_count"].get_string().value);
         std::string intro = std::string(doc["intro"].get_string().value);
 
         // 分类
@@ -103,6 +97,6 @@ public:
             chapters.push_back(Chapter::fromBson(val.get_document().view()));
         }
 
-        return Book(title, cover, author, status, categories, wordCount, intro, chapters);
+        return Book(title, cover, author, status,categories, wordCount, intro, chapters);
     }
 };
