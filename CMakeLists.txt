@@ -22,8 +22,8 @@ qt_add_executable(MongoDB_Study
     novel.h novel.cpp novel.ui
     BookItemWidget.h
     UserSession.h
-    ImportBookData.h
     json.hpp
+    categorydropdown.h categorydropdown.cpp
 )
 
 target_compile_features(MongoDB_Study PRIVATE cxx_std_17)
